@@ -74,7 +74,7 @@ public class UserController {
 
         if (userStatus.equals("ONLINE")) {
             userStatus = UserStatus.valueOf("ONLINE");
-        } else {
+        } if (userStatus.equals("OFFLINE")){
             userStatus = UserStatus.valueOf("OFFLINE");
         }
         return statusUserService.getStatuses(userStatus, timestamp);

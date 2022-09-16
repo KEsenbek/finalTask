@@ -16,16 +16,17 @@ public class StatusUserServiceImpl implements StatusUserService {
     @Autowired
     private UserRepo userRepo;
 
+
     @Override
     public CheckStatusResponse getStatuses(UserStatus status, Long timestamp) {
 
         List<User> users = userRepo.findAllByUserStatus(UserStatus.valueOf(status.toString()));
+        users = users.stream().filter(x -> x.getChangeDate() > timestamp).collect(Collectors.toList());
 
-        users.stream().filter(x -> x.getChangeDate() > timestamp).collect(Collectors.toList());
         CheckStatusResponse checkStatusResponse = new CheckStatusResponse();
         checkStatusResponse.setUsers(users);
         checkStatusResponse.setTimestamp(timestamp);
-        checkStatusResponse.setImageUri(users.stream().map(x->x.getImageUri()).toString());
+
         return checkStatusResponse;
     }
 }

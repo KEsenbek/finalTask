@@ -11,4 +11,5 @@ import java.util.ArrayList;
 public interface UserRepo extends JpaRepository<User, Long> {
     ArrayList<User> findAllByUserStatus(UserStatus status);
 
+
 }

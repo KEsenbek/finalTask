@@ -13,6 +13,8 @@ import java.util.List;
 public class CheckStatusResponse {
 
     Long timestamp;
-    String imageUri;
+
+
     List<User> users;
+
 }
