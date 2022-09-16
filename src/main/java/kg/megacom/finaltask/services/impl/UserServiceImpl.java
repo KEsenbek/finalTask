@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.Arrays;
 import java.util.Date;
 
 @Service
@@ -32,6 +31,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public User save(User user) {
         return userRepo.save(user);
+    }
+
+    @Override
+    public User update(User user) {
+        if (userRepo.existsById(user.getId())){
+            return userRepo.save(user);
+        }
+
+        return null;
     }
 
     @Override
@@ -55,7 +63,7 @@ public class UserServiceImpl implements UserService {
         ChangeStatusResponse change = new ChangeStatusResponse();
         Date date = new Date();
         change.setUserId(user.getId());
-        change.setOldStatus(UserStatus.valueOf(user.getUserStatus().toString()));
+        change.setOldStatus(user.getUserStatus());
         change.setNewStatus(UserStatus.valueOf(currentStatus.toString()));
         user.setUserStatus(UserStatus.valueOf(currentStatus.toString()));
         user.setChangeDate(date.getTime());

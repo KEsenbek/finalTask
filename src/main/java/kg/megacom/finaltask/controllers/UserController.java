@@ -51,7 +51,7 @@ public class UserController {
                                               @RequestParam(defaultValue = "ONLINE") UserStatus status) {
         if (status.equals("ONLINE")) {
             status = UserStatus.valueOf("ONLINE");
-        } else {
+        } if(status.equals("OFFLINE")) {
             status = UserStatus.valueOf("OFFLINE");
         }
 

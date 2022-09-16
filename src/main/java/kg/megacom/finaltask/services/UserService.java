@@ -9,6 +9,8 @@ public interface UserService {
 
     User save(User user);
 
+    User update (User user);
+
     User getById(Long id);
 
     Long addUser(User user, MultipartFile file);
